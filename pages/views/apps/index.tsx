@@ -1,9 +1,7 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
 
-import { App } from "lib/apollo/generated.graphql";
-
-const Apps: NextPage<{ apps: App }> = () => {
+const Apps: NextPage = () => {
   return <div>Apps</div>;
 };
 

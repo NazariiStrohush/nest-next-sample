@@ -11,12 +11,6 @@ export class ApplicationController {
     return {};
   }
 
-  @Render("admin")
-  @Get(["/admin/", "/admin/*"])
-  public admin() {
-    return {};
-  }
-
   @Render("home")
   @Get('/')
   public index(@Query("name") name?: string) {
