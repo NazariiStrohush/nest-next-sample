@@ -16,6 +16,7 @@ async function bootstrap() {
 
   service.setErrorHandler(async (err, req, res) => {
     // send JSON response
+    console.log(err);
     res.send(err.response);
   });
 

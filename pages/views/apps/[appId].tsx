@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await apolloClient.query<AllAppIdsQuery>({
     query: ALL_APP_IDS,
   });
-  const paths = data.allAppIds;
+  const paths = data.allAppIds.map((appId) => appId);
   console.log("getStaticPaths", paths);
 
   return {
