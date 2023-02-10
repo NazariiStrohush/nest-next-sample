@@ -1,0 +1,21 @@
+schema: 'http://localhost:7000/graphql'
+overwrite: true
+watch: false
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+documents:
+  - './lib/queries/**/*.{js,ts}'
+  - './lib/mutations/**/*.{js,ts}'
+  - '!/lib/apollo/generated.graphql.tsx'
+generates:
+  ./lib/apollo/generated.graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      declarationKind: 'interface'
+  ./lib/apollo/graphql.schema.json:
+    plugins:
+      - 'introspection'
