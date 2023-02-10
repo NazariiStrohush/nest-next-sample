@@ -1,13 +1,5 @@
-import { createStore } from 'redux';
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+import { createStore } from "redux";
 
-import combinedReducers from './reducers/index';
-
-// const persistConfig = {
-//   key: 'primary',
-//   storage,
-//   whitelist: ['users'],
-// };
+import combinedReducers from "./reducers/index";
 
 export default createStore(combinedReducers);

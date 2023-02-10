@@ -4,35 +4,19 @@ import {
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { getCookie } from '../helpers/cookies';
-// import { WebSocketLink } from '@apollo/client/link/ws';
-import * as process from 'process';
-
-// export const wsLink = new WebSocketLink({
-//   uri: WEBSOCKET_URL,
-//   options: {
-//     lazy: true,
-//     timeout: 30000,
-//     reconnect: true,
-//     connectionParams: function () {
-//       const token = getCookie('token') || '';
-//       return {
-//         authorization: token ? `Bearer ${token}` : '',
-//       };
-//     },
-//   },
-// });
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { getCookie } from "../helpers/cookies";
+import * as process from "process";
 
 const authLink = setContext((_, req) => {
   // get the authentication token from cookies if it exists
-  const token = getCookie('token') || '';
+  const token = getCookie("token") || "";
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...req.headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -43,7 +27,7 @@ const httpLink = new HttpLink({
 
 export const createApolloClient = () => {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    ssrMode: typeof window === "undefined",
     link: from([authLink, httpLink]),
     cache: new InMemoryCache(),
   });
@@ -66,7 +50,7 @@ export const initializeApollo = (initialState?: NormalizedCacheObject) => {
   }
 
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') return _apolloClient;
+  if (typeof window === "undefined") return _apolloClient;
 
   // Create the Apollo Client once in the client
   if (!apolloClient) apolloClient = _apolloClient;
@@ -74,7 +58,7 @@ export const initializeApollo = (initialState?: NormalizedCacheObject) => {
 };
 
 export const extractApolloState = (
-  apolloClient: ApolloClient<NormalizedCacheObject>,
+  apolloClient: ApolloClient<NormalizedCacheObject>
 ) => {
   return { initialApolloState: apolloClient.cache.extract() };
 };
